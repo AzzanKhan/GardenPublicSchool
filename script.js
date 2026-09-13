@@ -20,9 +20,9 @@ enquiryForm?.addEventListener('submit', (event) => {
   const data = new FormData(enquiryForm);
   const name = String(data.get('name') || '').trim();
   const phone = String(data.get('phone') || '').trim();
-  const classInterest = String(data.get('class') || '').trim();
+  const query = String(data.get('query') || '').trim();
   const subject = encodeURIComponent(`Admission enquiry from ${name}`);
-  const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nClass interested in: ${classInterest}`);
+  const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nQuestion: ${query}`);
   window.location.href = `mailto:info@gardenpublicschool.in?subject=${subject}&body=${body}`;
   if (formNote) formNote.textContent = 'Your email app is opening with the enquiry details ready to send.';
 });
