@@ -1,5 +1,7 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
+const enquiryForm = document.querySelector('#enquiry-form');
+const formNote = document.querySelector('#form-note');
 
 menuToggle?.addEventListener('click', () => {
   const isOpen = nav.classList.toggle('open');
@@ -11,6 +13,18 @@ document.querySelectorAll('.nav a').forEach((link) => {
     nav.classList.remove('open');
     menuToggle?.setAttribute('aria-expanded', 'false');
   });
+});
+
+enquiryForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const data = new FormData(enquiryForm);
+  const name = String(data.get('name') || '').trim();
+  const phone = String(data.get('phone') || '').trim();
+  const classInterest = String(data.get('class') || '').trim();
+  const subject = encodeURIComponent(`Admission enquiry from ${name}`);
+  const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nClass interested in: ${classInterest}`);
+  window.location.href = `mailto:info@gardenpublicschool.in?subject=${subject}&body=${body}`;
+  if (formNote) formNote.textContent = 'Your email app is opening with the enquiry details ready to send.';
 });
 
 const carouselTrack = document.querySelector('.carousel-track');
